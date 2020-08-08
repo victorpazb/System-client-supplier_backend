@@ -212,29 +212,28 @@ public interface ErrorChecker {
 		if (supplierName.trim().equals("") || supplierName == null) {
 			throw new IllegalArgumentException("Erro na exibicao de produto: fornecedor nao pode ser vazio ou nulo.");
 		}
-		
+
 		if (!supplierCollection.containsKey(supplierName)) {
 			throw new NullPointerException("Erro na exibicao de produto: fornecedor nao existe.");
 		}
 
-		
+		if (supplierCollection.get(supplierName).getSupplierProducts().isEmpty() || !supplierCollection.get(supplierName)
+				.getSupplierProducts().containsKey(productName + " - " + productDescription)) {
+			throw new NullPointerException("Erro na exibicao de produto: produto nao existe.");
+		}
 
 	}
 
 	static void exibeProdutosFornecedor(String supplierName, HashMap<String, Supplier> supplierCollection) {
-		
-		if(supplierName.trim().equals("") || supplierName == null) {
+
+		if (supplierName.trim().equals("") || supplierName == null) {
 			throw new IllegalArgumentException("EXIBINDO PRODUTOS DO FORNECEDOR: NOME FORNECEDOR VAZIO OU NULO.");
 		}
-		
-		if(!supplierCollection.containsKey(supplierName)) {
+
+		if (!supplierCollection.containsKey(supplierName)) {
 			throw new NullPointerException("EXIBINDO PRODUTOS DO FORNECEDOR: FORNECEDOR NAO EXISTE!");
 		}
-		
-		if(supplierCollection.get(supplierName).getSupplierProducts().isEmpty()) {
-			throw new NullPointerException("EXIBINDO PRODUTOS DO FORNECEDOR: SUPPLIER LIST IS EMPTY!");
-		}
-		
+
 	}
 
 }

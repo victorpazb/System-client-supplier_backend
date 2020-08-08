@@ -69,5 +69,9 @@ public class Facade {
 	public String exibeProdutosFornecedor(String supplierName) {
 		return controle.exibeProdutosFornecedor(supplierName);
 	}
+	
+	public String exibeProdutos() {
+		return controle.exibeProdutos();
+	}
 
 }

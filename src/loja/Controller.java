@@ -3,6 +3,8 @@ package loja;
 import java.util.ArrayList;
 
 import java.util.Collections;
+import java.util.HashMap;
+
 import collections.*;
 import entities.*;
 import exceptions.*;
@@ -162,9 +164,7 @@ public class Controller {
 				this.collections.getSupplierCollection());
 
 		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
-
 		String productKey = productName + " - " + productDescription;
-
 		Product product = supplier.getSupplierProducts().get(productKey);
 
 		return product.toString();
@@ -188,5 +188,38 @@ public class Controller {
 		}
 
 		return outComeStringOfProductsOfSupplier.substring(0, outComeStringOfProductsOfSupplier.length() - 3);
+	}
+
+	public String exibeProdutos() {
+		
+		//ErrorChecker.exibeProdutos();
+
+		//boolean noProductsInSystem = true;
+		
+		String outcomeStringOfAllProductsInSystem = "";
+		ArrayList<Supplier> sortedSuppliers = new ArrayList<>();
+		sortedSuppliers.addAll(this.collections.getSupplierCollection().values());
+
+		Collections.sort(sortedSuppliers);
+
+		for (Supplier supplier : sortedSuppliers) {
+			ArrayList<Product> sortedProducts = new ArrayList<>();
+
+			HashMap<String, Product> mapWithProductsOfASupplier = new HashMap<>();
+			mapWithProductsOfASupplier = this.collections.getSupplierCollection().get(supplier.getName())
+					.getSupplierProducts();
+
+			sortedProducts.addAll(mapWithProductsOfASupplier.values());
+
+			Collections.sort(sortedProducts);
+
+			for (Product product : sortedProducts) {
+				outcomeStringOfAllProductsInSystem += supplier.getName() + " - ";
+				outcomeStringOfAllProductsInSystem += product.toString() + " | ";
+			}
+
+		}
+
+		return outcomeStringOfAllProductsInSystem.substring(0, outcomeStringOfAllProductsInSystem.length() - 3);
 	}
 }
