@@ -10,6 +10,10 @@ public abstract class Product implements Comparable<Product> {
 		this.productDescription = productDescription;
 		this.price = price;
 	}
+	
+	public void setPrice(double newPrice) {
+		this.price = newPrice;
+	}
 
 	private String editPrice(double price) {
 

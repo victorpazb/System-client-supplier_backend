@@ -73,5 +73,9 @@ public class Facade {
 	public String exibeProdutos() {
 		return controle.exibeProdutos();
 	}
+	
+	public void editaProduto(String productName, String productDescription, String supplierName, double newPrice) {
+		controle.edidaProduto(productName, productDescription, supplierName, newPrice);
+	}
 
 }

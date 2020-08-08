@@ -151,6 +151,10 @@ public class Controller {
 
 	// ========================= USE CASE 3 =================================
 
+	private String productKey(String productName, String productDescription) {
+		return productName + " - " + productDescription;
+	}
+
 	public void adicionaProduto(String supplierName, String productName, String productDescription, double price) {
 
 		ErrorChecker.adicionaProduto(supplierName, productName, productDescription, price,
@@ -191,11 +195,7 @@ public class Controller {
 	}
 
 	public String exibeProdutos() {
-		
-		//ErrorChecker.exibeProdutos();
 
-		//boolean noProductsInSystem = true;
-		
 		String outcomeStringOfAllProductsInSystem = "";
 		ArrayList<Supplier> sortedSuppliers = new ArrayList<>();
 		sortedSuppliers.addAll(this.collections.getSupplierCollection().values());
@@ -221,5 +221,16 @@ public class Controller {
 		}
 
 		return outcomeStringOfAllProductsInSystem.substring(0, outcomeStringOfAllProductsInSystem.length() - 3);
+	}
+
+	public void edidaProduto(String productName, String productDescription, String supplierName, double newPrice) {
+
+		// ErrorChecker.editaProduto(ahsudhsd);
+
+		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
+		Product product = supplier.getSupplierProducts().get(productKey(productName, productDescription));
+
+		product.setPrice(newPrice);
+
 	}
 }
