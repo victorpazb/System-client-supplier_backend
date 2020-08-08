@@ -156,4 +156,9 @@ public class Controller {
 		Supplier supplier =  this.collections.getSupplierCollection().get(supplierName);
 		supplier.adicionaProduct(productName, productDescription, price);
 	}
+
+	public String exibeProduto(String productName, String productDescription, String supplierName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

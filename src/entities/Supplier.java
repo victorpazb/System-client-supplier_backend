@@ -49,6 +49,10 @@ public class Supplier implements Comparable<Supplier> {
 		}
 
 	}
+	
+	public HashMap<String, Product> getSupplierProducts(){
+		return this.collectionOfProcts;
+	}
 
 	public void setEmail(String newValue) {
 		this.supplierEmail = newValue;

@@ -170,7 +170,7 @@ public interface ErrorChecker {
 
 	static void adicionaProduto(String supplierName, String productName, String productDescription, double price,
 			HashMap<String, Supplier> supplierCollection) {
-		
+
 		// SUPPLIER ERROR
 
 		if (supplierName.equals("") || supplierName == null) {
@@ -179,9 +179,6 @@ public interface ErrorChecker {
 		} else if (!supplierCollection.containsKey(supplierName)) {
 			throw new NullPointerException("Erro no cadastro de produto: fornecedor nao existe.");
 		}
-		
-		
-		
 
 		if (productName.equals("") || productName == null) {
 			throw new IllegalArgumentException("Erro no cadastro de produto: nome nao pode ser vazio ou nulo.");
@@ -191,6 +188,14 @@ public interface ErrorChecker {
 			throw new IllegalArgumentException("Erro no cadastro de produto: descricao nao pode ser vazia ou nula.");
 		}
 
+		if (price < 0) {
+			throw new IllegalArgumentException("Erro no cadastro de produto: preco invalido.");
+		}
+
+		if (supplierCollection.get(supplierName).getSupplierProducts()
+				.containsKey(productName + " - " + productDescription)) {
+			throw new NullPointerException("Erro no cadastro de produto: produto ja existe.");
+		}
 	}
 
 }
