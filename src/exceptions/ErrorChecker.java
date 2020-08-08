@@ -221,4 +221,20 @@ public interface ErrorChecker {
 
 	}
 
+	static void exibeProdutosFornecedor(String supplierName, HashMap<String, Supplier> supplierCollection) {
+		
+		if(supplierName.trim().equals("") || supplierName == null) {
+			throw new IllegalArgumentException("EXIBINDO PRODUTOS DO FORNECEDOR: NOME FORNECEDOR VAZIO OU NULO.");
+		}
+		
+		if(!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("EXIBINDO PRODUTOS DO FORNECEDOR: FORNECEDOR NAO EXISTE!");
+		}
+		
+		if(supplierCollection.get(supplierName).getSupplierProducts().isEmpty()) {
+			throw new NullPointerException("EXIBINDO PRODUTOS DO FORNECEDOR: SUPPLIER LIST IS EMPTY!");
+		}
+		
+	}
+
 }

@@ -1,6 +1,6 @@
 package entities;
 
-public class SimpleProduct extends Product {
+public class SimpleProduct extends Product  {
 	
 	
 	

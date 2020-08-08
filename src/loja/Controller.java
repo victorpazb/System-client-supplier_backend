@@ -169,4 +169,24 @@ public class Controller {
 
 		return product.toString();
 	}
+
+	public String exibeProdutosFornecedor(String supplierName) {
+
+		ErrorChecker.exibeProdutosFornecedor(supplierName, this.collections.getSupplierCollection());
+
+		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
+		ArrayList<Product> productsOfSupplier = new ArrayList<>();
+		productsOfSupplier.addAll(supplier.getSupplierProducts().values());
+
+		Collections.sort(productsOfSupplier);
+
+		String outComeStringOfProductsOfSupplier = "";
+
+		for (Product product : productsOfSupplier) {
+			outComeStringOfProductsOfSupplier += supplier.getName() + " - ";
+			outComeStringOfProductsOfSupplier += product.toString() + " | ";
+		}
+
+		return outComeStringOfProductsOfSupplier.substring(0, outComeStringOfProductsOfSupplier.length() - 3);
+	}
 }
