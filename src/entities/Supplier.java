@@ -1,4 +1,5 @@
 package entities;
+
 import java.util.HashMap;
 
 import collections.*;
@@ -7,18 +8,17 @@ public class Supplier implements Comparable<Supplier> {
 
 	private String supplierName, supplierEmail, supplierPhone;
 	private CollectionsOfObjects collection;
-	private HashMap<String, Product> collectionOfProcts; 
-	
+	private HashMap<String, Product> collectionOfProcts;
 
 	public Supplier(String supplierName, String supplierEmail, String supplierPhone) {
 		this.supplierName = supplierName;
 		this.supplierEmail = supplierEmail;
 		this.supplierPhone = supplierPhone;
-		
+
 		this.collection = new CollectionsOfObjects();
-		
+
 		this.collectionOfProcts = this.collection.getProductCollection();
-		
+
 	}
 
 	@Override
@@ -49,8 +49,8 @@ public class Supplier implements Comparable<Supplier> {
 		}
 
 	}
-	
-	public HashMap<String, Product> getSupplierProducts(){
+
+	public HashMap<String, Product> getSupplierProducts() {
 		return this.collectionOfProcts;
 	}
 
@@ -61,13 +61,13 @@ public class Supplier implements Comparable<Supplier> {
 	public void setPhone(String newValue) {
 		this.supplierPhone = newValue;
 	}
-	
+
 	public void adicionaProduct(String productName, String productDescription, double price) {
-		
-		
-		Product newProduct = new SimpleProduct(productName, productDescription, price);
-		this.collectionOfProcts.put(productName + " - "  + productDescription, newProduct);
-		
+
+		SimpleProduct newProduct = new SimpleProduct(productName, productDescription, price);
+
+		this.collectionOfProcts.put(productName + " - " + productDescription, newProduct);
+
 	}
 
 }

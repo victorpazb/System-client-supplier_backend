@@ -1,11 +1,17 @@
 package entities;
 
-public class SimpleProduct extends Product{
+public class SimpleProduct extends Product {
 	
 	
 	
+
 	public SimpleProduct(String productName, String productDescription, double productPrice) {
-		super();
+		super(productName, productDescription, productPrice);
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 }

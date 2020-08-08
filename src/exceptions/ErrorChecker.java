@@ -198,4 +198,27 @@ public interface ErrorChecker {
 		}
 	}
 
+	static void exibeProduto(String productName, String productDescription, String supplierName,
+			HashMap<String, Supplier> supplierCollection) {
+
+		if (productName.trim().equals("") || productName == null) {
+			throw new IllegalArgumentException("Erro na exibicao de produto: nome nao pode ser vazio ou nulo.");
+		}
+
+		if (productDescription.trim().equals("") || productDescription == null) {
+			throw new IllegalArgumentException("Erro na exibicao de produto: descricao nao pode ser vazia ou nula.");
+		}
+
+		if (supplierName.trim().equals("") || supplierName == null) {
+			throw new IllegalArgumentException("Erro na exibicao de produto: fornecedor nao pode ser vazio ou nulo.");
+		}
+		
+		if (!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("Erro na exibicao de produto: fornecedor nao existe.");
+		}
+
+		
+
+	}
+
 }

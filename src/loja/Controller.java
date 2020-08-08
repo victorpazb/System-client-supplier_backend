@@ -10,7 +10,7 @@ import exceptions.*;
 public class Controller {
 
 	private CollectionsOfObjects collections;
-	
+
 	public Controller() {
 		this.collections = new CollectionsOfObjects();
 
@@ -142,23 +142,31 @@ public class Controller {
 	}
 
 	public void removeFornecedor(String supplierName) {
-		
+
 		ErrorChecker.removeFornecedor(supplierName, this.collections.getSupplierCollection());
 		this.collections.getSupplierCollection().remove(supplierName);
 	}
-	
-	
+
 	// ========================= USE CASE 3 =================================
 
 	public void adicionaProduto(String supplierName, String productName, String productDescription, double price) {
-		
-		ErrorChecker.adicionaProduto(supplierName, productName, productDescription, price, this.collections.getSupplierCollection());
-		Supplier supplier =  this.collections.getSupplierCollection().get(supplierName);
+
+		ErrorChecker.adicionaProduto(supplierName, productName, productDescription, price,
+				this.collections.getSupplierCollection());
+		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
 		supplier.adicionaProduct(productName, productDescription, price);
 	}
 
 	public String exibeProduto(String productName, String productDescription, String supplierName) {
-		// TODO Auto-generated method stub
-		return null;
+		ErrorChecker.exibeProduto(productName, productDescription, supplierName,
+				this.collections.getSupplierCollection());
+
+		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
+
+		String productKey = productName + " - " + productDescription;
+
+		Product product = supplier.getSupplierProducts().get(productKey);
+
+		return product.toString();
 	}
 }
