@@ -236,4 +236,29 @@ public interface ErrorChecker {
 
 	}
 
+	static void editaProduto(String productName, String productDescription, String supplierName, double newPrice,
+			HashMap<String, Supplier> supplierCollection) {
+
+		if(productName.trim().equals("") || productName == null) {
+			throw new IllegalArgumentException("Erro na edicao de produto: nome nao pode ser vazio ou nulo.");
+		}
+		
+		if(productDescription.trim().equals("") || productDescription == null) {
+			throw new IllegalArgumentException("Erro na edicao de produto: descricao nao pode ser vazia ou nula.");
+		}
+		
+		if(supplierName.trim().equals("") || supplierName == null) {
+			throw new IllegalArgumentException("Erro na edicao de produto: fornecedor nao pode ser vazio ou nulo.");
+		}
+		
+		if(newPrice < 0) {
+			throw new IllegalArgumentException("Erro na edicao de produto: preco invalido.");
+		}
+		
+		if(!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("Erro na edicao de produto: fornecedor nao existe.");
+		}
+		
+	}
+
 }

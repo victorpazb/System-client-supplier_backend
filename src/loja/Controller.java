@@ -225,7 +225,7 @@ public class Controller {
 
 	public void edidaProduto(String productName, String productDescription, String supplierName, double newPrice) {
 
-		// ErrorChecker.editaProduto(ahsudhsd);
+		ErrorChecker.editaProduto(productName, productDescription, supplierName, newPrice, this.collections.getSupplierCollection());
 
 		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
 		Product product = supplier.getSupplierProducts().get(productKey(productName, productDescription));
