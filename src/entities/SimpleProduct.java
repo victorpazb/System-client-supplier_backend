@@ -13,5 +13,9 @@ public class SimpleProduct extends Product  {
 	public String toString() {
 		return super.toString();
 	}
+	
+	public double getPrice() {
+		return super.getPrice();
+	}
 
 }

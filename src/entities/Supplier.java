@@ -1,4 +1,6 @@
 package entities;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import collections.*;
@@ -7,18 +9,17 @@ public class Supplier implements Comparable<Supplier> {
 
 	private String supplierName, supplierEmail, supplierPhone;
 	private CollectionsOfObjects collection;
-	private HashMap<String, Product> collectionOfProcts; 
-	
+	private HashMap<String, Product> collectionOfProducts;
 
 	public Supplier(String supplierName, String supplierEmail, String supplierPhone) {
 		this.supplierName = supplierName;
 		this.supplierEmail = supplierEmail;
 		this.supplierPhone = supplierPhone;
-		
+
 		this.collection = new CollectionsOfObjects();
-		
-		this.collectionOfProcts = this.collection.getProductCollection();
-		
+
+		this.collectionOfProducts = this.collection.getProductCollection();
+
 	}
 
 	@Override
@@ -49,9 +50,9 @@ public class Supplier implements Comparable<Supplier> {
 		}
 
 	}
-	
-	public HashMap<String, Product> getSupplierProducts(){
-		return this.collectionOfProcts;
+
+	public HashMap<String, Product> getSupplierProducts() {
+		return this.collectionOfProducts;
 	}
 
 	public void setEmail(String newValue) {
@@ -61,15 +62,35 @@ public class Supplier implements Comparable<Supplier> {
 	public void setPhone(String newValue) {
 		this.supplierPhone = newValue;
 	}
-	
+
 	public void adicionaProduct(String productName, String productDescription, double price) {
-		
-		
+
 		SimpleProduct newProduct = new SimpleProduct(productName, productDescription, price);
+
+		this.collectionOfProducts.put(productName + " - " + productDescription, newProduct);
+
+	}
+
+	public void addCombo(String comboName, String comboDescription, double discountFactor, String productsOfCombo) {
+
+		String comboKey = comboName + " - " + comboDescription; //in the map of products the key is:  "NAME - DESCRIPTION"
+		
+		ArrayList<Product> listOfProducts = new ArrayList<>(); // ArrayList to put the products thtat will compose de the combo
+		
+		String[] productsKeyList = productsOfCombo.split(", "); // the combo keys are separeted for a comma and space ", "
+		
+		for (String productKey : productsKeyList) {
+			if(this.collectionOfProducts.containsKey(productKey)) {
+				listOfProducts.add(this.collectionOfProducts.get(productKey));
+			}
+		}
 		
 		
-		this.collectionOfProcts.put(productName + " - "  + productDescription, newProduct);
-		
+		ComboProduct newCombo = new ComboProduct(comboName, comboDescription, discountFactor, productsOfCombo,
+				listOfProducts);
+
+		this.collectionOfProducts.put(comboKey, newCombo);
+
 	}
 
 }

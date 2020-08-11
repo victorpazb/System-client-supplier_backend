@@ -253,7 +253,27 @@ public class Controller {
 		supplier.getSupplierProducts().remove(productKey); //REMOVE PRODUCT
 
 	}
-	
+
 	
 	// =============================== USE CASE 4 ===============================
+	
+	
+	public void adicionaCombo(String supplierName, String comboName, String comboDescription, double discountFactor,
+			String productsOfCombo) {
+		
+		//ErrorChecker.adicionaCombo.
+		
+		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
+		supplier.addCombo(comboName, comboDescription, discountFactor, productsOfCombo);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -11,6 +11,13 @@ public abstract class Product implements Comparable<Product> {
 		this.price = price;
 	}
 	
+	public String getKey() {
+		return this.productName + " - " + this.productDescription;
+	}
+	
+	public double getPrice() {
+		return this.price;
+	}
 	public void setPrice(double newPrice) {
 		this.price = newPrice;
 	}

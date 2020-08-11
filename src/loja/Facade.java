@@ -6,7 +6,7 @@ public class Facade {
 
 	public static void main(String[] args) {
 		args = new String[] { "loja.Facade", "testesAceitacao/use_case_1.txt", "testesAceitacao/use_case_2.txt",
-				"testesAceitacao/use_case_3.txt" };
+				"testesAceitacao/use_case_3.txt", "testesAceitacao/use_case_4.txt" };
 		EasyAccept.main(args);
 	}
 	
@@ -94,7 +94,9 @@ public class Facade {
 	// =============================== USE CASE 4 ===============================
 	
 	
-	
+	public void adicionaCombo(String supplierName, String comboName, String comboDescription, double discountFactor, String productsOfCombo) {
+		controle.adicionaCombo(supplierName, comboName, comboDescription, discountFactor, productsOfCombo);
+	}
 	
 	
 	
