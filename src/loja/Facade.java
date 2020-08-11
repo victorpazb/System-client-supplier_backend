@@ -9,6 +9,8 @@ public class Facade {
 				"testesAceitacao/use_case_3.txt" };
 		EasyAccept.main(args);
 	}
+	
+	
 
 	// ============================= USE CASE 1 ===================================
 
@@ -33,6 +35,9 @@ public class Facade {
 	public void removeCliente(String clientCpf) {
 		controle.removeCliente(clientCpf);
 	}
+	
+	
+	
 
 	// ============================= USE CASE 2 ===================================
 
@@ -55,6 +60,9 @@ public class Facade {
 	public void removeFornecedor(String supplierName) {
 		controle.removeFornecedor(supplierName);
 	}
+	
+	
+	
 
 	// ============================ USE CASE 3 =================================
 
@@ -78,4 +86,17 @@ public class Facade {
 		controle.edidaProduto(productName, productDescription, supplierName, newPrice);
 	}
 
+	public void removeProduto(String productName, String productDescription, String supplierName) {
+		controle.removeProduto(productName, productDescription, supplierName);
+	}
+	
+	
+	// =============================== USE CASE 4 ===============================
+	
+	
+	
+	
+	
+	
+	
 }

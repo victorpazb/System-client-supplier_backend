@@ -85,6 +85,9 @@ public class Controller {
 		ErrorChecker.removeCliente(clientCpf, this.collections.getClientCollection());
 		collections.deleteClient(clientCpf);
 	}
+	
+	
+	
 
 	// ============================= USE CASE 2 ===================================
 
@@ -148,6 +151,9 @@ public class Controller {
 		ErrorChecker.removeFornecedor(supplierName, this.collections.getSupplierCollection());
 		this.collections.getSupplierCollection().remove(supplierName);
 	}
+	
+	
+	
 
 	// ========================= USE CASE 3 =================================
 
@@ -225,7 +231,8 @@ public class Controller {
 
 	public void edidaProduto(String productName, String productDescription, String supplierName, double newPrice) {
 
-		ErrorChecker.editaProduto(productName, productDescription, supplierName, newPrice, this.collections.getSupplierCollection());
+		ErrorChecker.editaProduto(productName, productDescription, supplierName, newPrice,
+				this.collections.getSupplierCollection());
 
 		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
 		Product product = supplier.getSupplierProducts().get(productKey(productName, productDescription));
@@ -233,4 +240,20 @@ public class Controller {
 		product.setPrice(newPrice);
 
 	}
+
+	public void removeProduto(String productName, String productDescription, String supplierName) {
+
+		ErrorChecker.removeProduto(productName, productDescription, supplierName,
+				this.collections.getSupplierCollection());
+
+		Supplier supplier = this.collections.getSupplierCollection().get(supplierName); //GET SUPPLIER 
+		String productKey = productKey(productName, productDescription); // GET PRODCUT KEY
+
+		
+		supplier.getSupplierProducts().remove(productKey); //REMOVE PRODUCT
+
+	}
+	
+	
+	// =============================== USE CASE 4 ===============================
 }

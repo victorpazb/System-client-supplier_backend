@@ -217,8 +217,8 @@ public interface ErrorChecker {
 			throw new NullPointerException("Erro na exibicao de produto: fornecedor nao existe.");
 		}
 
-		if (supplierCollection.get(supplierName).getSupplierProducts().isEmpty() || !supplierCollection.get(supplierName)
-				.getSupplierProducts().containsKey(productName + " - " + productDescription)) {
+		if (supplierCollection.get(supplierName).getSupplierProducts().isEmpty() || !supplierCollection
+				.get(supplierName).getSupplierProducts().containsKey(productName + " - " + productDescription)) {
 			throw new NullPointerException("Erro na exibicao de produto: produto nao existe.");
 		}
 
@@ -239,26 +239,62 @@ public interface ErrorChecker {
 	static void editaProduto(String productName, String productDescription, String supplierName, double newPrice,
 			HashMap<String, Supplier> supplierCollection) {
 
-		if(productName.trim().equals("") || productName == null) {
+		if (productName.trim().equals("") || productName == null) {
 			throw new IllegalArgumentException("Erro na edicao de produto: nome nao pode ser vazio ou nulo.");
 		}
-		
-		if(productDescription.trim().equals("") || productDescription == null) {
+
+		if (productDescription.trim().equals("") || productDescription == null) {
 			throw new IllegalArgumentException("Erro na edicao de produto: descricao nao pode ser vazia ou nula.");
 		}
-		
-		if(supplierName.trim().equals("") || supplierName == null) {
+
+		if (supplierName.trim().equals("") || supplierName == null) {
 			throw new IllegalArgumentException("Erro na edicao de produto: fornecedor nao pode ser vazio ou nulo.");
 		}
-		
-		if(newPrice < 0) {
+
+		if (newPrice < 0) {
 			throw new IllegalArgumentException("Erro na edicao de produto: preco invalido.");
 		}
-		
-		if(!supplierCollection.containsKey(supplierName)) {
+
+		if (!supplierCollection.containsKey(supplierName)) {
 			throw new NullPointerException("Erro na edicao de produto: fornecedor nao existe.");
 		}
-		
+
 	}
+
+	static void removeProduto(String productName, String productDescription, String supplierName,
+			HashMap<String, Supplier> supplierCollection) {
+
+		if (productName.trim().equals("") || productName == null) {
+			throw new IllegalArgumentException("Erro na remocao de produto: nome nao pode ser vazio ou nulo.");
+		}
+
+		if (productDescription.trim().equals("") || productDescription == null) {
+			throw new IllegalArgumentException("Erro na remocao de produto: descricao nao pode ser vazia ou nula.");
+		}
+
+		if (supplierName.trim().equals("") || supplierName == null) {
+			throw new IllegalArgumentException("Erro na remocao de produto: fornecedor nao pode ser vazio ou nulo.");
+		}
+
+		
+		
+		
+		if (!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("Erro na remocao de produto: fornecedor nao existe.");
+
+		 } else {
+
+			Supplier supplier = supplierCollection.get(supplierName);
+			String productKey = productName + " - " + productDescription;
+
+			if (!supplier.getSupplierProducts().containsKey(productKey)) {
+				throw new NullPointerException("Erro na remocao de produto: produto nao existe.");
+			}
+		}
+
+	}
+	
+	
+	// =============================== USE CASE 4 ===============================
 
 }
