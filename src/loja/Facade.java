@@ -6,7 +6,7 @@ public class Facade {
 
 	public static void main(String[] args) {
 		args = new String[] { "loja.Facade", "testesAceitacao/use_case_1.txt", "testesAceitacao/use_case_2.txt",
-				"testesAceitacao/use_case_3.txt", "testesAceitacao/use_case_4.txt" };
+				"testesAceitacao/use_case_3.txt", "testesAceitacao/use_case_4.txt", "testesAceitacao/use_case_5.txt" };
 		EasyAccept.main(args);
 	}
 	
