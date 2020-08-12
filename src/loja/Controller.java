@@ -93,6 +93,7 @@ public class Controller {
 		ErrorChecker.adicionaFornecedor(supplierName, supplierEmail, supplierPhone,
 				this.collections.getSupplierCollection());
 		Supplier newSupplier = new Supplier(supplierName, supplierEmail, supplierPhone);
+
 		this.collections.addToSupplierColection(supplierName, newSupplier);
 
 		return this.collections.getSupplierCollection().get(supplierName).getName();
@@ -274,8 +275,40 @@ public class Controller {
 		}
 
 	}
-	
-	
+
 	// =============================== USE CASE 5 ===============================
+
+	private double priceOfPurchase(String productName, String productDescription, String supplierName) {
+		double price = 0;
+		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
+
+		if (supplier.getSupplierProducts().containsKey(productName + " - " + productDescription)) {
+			price = supplier.getSupplierProducts().get(productName + " - " + productDescription).getPrice();
+		}
+
+		return price;
+	}
+
+	public void adicionaCompra(String clientCpf, String supplierName, String dateOfPurchase, String productName,
+			String productDescription) {
+
+		ErrorChecker.adicionaCombo(clientCpf, supplierName, dateOfPurchase, productName, productDescription,
+				this.collections.getClientCollection(), this.collections.getProductCollection(),
+				this.collections.getSupplierCollection());
+
+		Client client = this.collections.getClientCollection().get(clientCpf);
+		client.addPurchase(supplierName, dateOfPurchase, productName, productDescription,
+				priceOfPurchase(productName, productDescription, supplierName));
+
+	}
+
+	public String getDebito(String clientCpf, String supplierName) {
+		ErrorChecker.getDebito(clientCpf, supplierName, this.collections.getClientCollection(),
+				this.collections.getSupplierCollection());
+		Client client = this.collections.getClientCollection().get(clientCpf);
+
+		return client.getDebito(supplierName);
+
+	}
 
 }

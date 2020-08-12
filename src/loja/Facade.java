@@ -9,8 +9,6 @@ public class Facade {
 				"testesAceitacao/use_case_3.txt", "testesAceitacao/use_case_4.txt", "testesAceitacao/use_case_5.txt" };
 		EasyAccept.main(args);
 	}
-	
-	
 
 	// ============================= USE CASE 1 ===================================
 
@@ -35,9 +33,6 @@ public class Facade {
 	public void removeCliente(String clientCpf) {
 		controle.removeCliente(clientCpf);
 	}
-	
-	
-	
 
 	// ============================= USE CASE 2 ===================================
 
@@ -60,9 +55,6 @@ public class Facade {
 	public void removeFornecedor(String supplierName) {
 		controle.removeFornecedor(supplierName);
 	}
-	
-	
-	
 
 	// ============================ USE CASE 3 =================================
 
@@ -73,15 +65,15 @@ public class Facade {
 	public String exibeProduto(String productName, String productDescription, String supplierName) {
 		return controle.exibeProduto(productName, productDescription, supplierName);
 	}
-	
+
 	public String exibeProdutosFornecedor(String supplierName) {
 		return controle.exibeProdutosFornecedor(supplierName);
 	}
-	
+
 	public String exibeProdutos() {
 		return controle.exibeProdutos();
 	}
-	
+
 	public void editaProduto(String productName, String productDescription, String supplierName, double newPrice) {
 		controle.edidaProduto(productName, productDescription, supplierName, newPrice);
 	}
@@ -89,22 +81,27 @@ public class Facade {
 	public void removeProduto(String productName, String productDescription, String supplierName) {
 		controle.removeProduto(productName, productDescription, supplierName);
 	}
-	
-	
+
 	// =============================== USE CASE 4 ===============================
-	
-	
-	public void adicionaCombo(String supplierName, String comboName, String comboDescription, double discountFactor, String productsOfCombo) {
+
+	public void adicionaCombo(String supplierName, String comboName, String comboDescription, double discountFactor,
+			String productsOfCombo) {
 		controle.adicionaCombo(supplierName, comboName, comboDescription, discountFactor, productsOfCombo);
 	}
-	
+
 	public void editaCombo(String comboName, String comboDescription, String supplierName, double newDiscountFactor) {
 		controle.editaCombo(comboName, comboDescription, supplierName, newDiscountFactor);
 	}
-	
+
 	// =============================== USE CASE 5 ===============================
+
+	public void adicionaCompra(String clientCpf, String supplierName, String date, String productName,
+			String productDescription) {
+		controle.adicionaCompra(clientCpf, supplierName, date, productName, productDescription);
+	}
 	
-	
-	
-	
+	public String getDebito(String clientCpf, String supplierName) {
+		return controle.getDebito(clientCpf, supplierName);
+	}
+
 }

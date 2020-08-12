@@ -7,11 +7,13 @@ public class CollectionsOfObjects {
 	private HashMap<String, Client> clientCollection;
 	private HashMap<String, Supplier> supplierCollection;
 	private HashMap<String, Product> productCollection;
+	private HashMap<String, Purchase> purchaseCollection;
 
 	public CollectionsOfObjects() {
 		this.clientCollection = new HashMap<>();
 		this.supplierCollection = new HashMap<>();
 		this.productCollection = new HashMap<>();
+		this.purchaseCollection =  new HashMap<>();
 	}
 
 	// ON CLIENT COLLECTION
@@ -29,7 +31,7 @@ public class CollectionsOfObjects {
 	}
 
 	
-	// ON SUPPLIER COLLECTION
+	// SUPPLIER COLLECTION
 	public HashMap<String, Supplier> getSupplierCollection() {
 		return this.supplierCollection;
 	}
@@ -54,6 +56,20 @@ public class CollectionsOfObjects {
 	
 	public void deleteProduct(String keyOfProduct) {
 		this.productCollection.remove(keyOfProduct);
+	}
+	
+	// PURSCHASE COLLECTION
+	
+	public HashMap<String, Purchase> getPurchaseCollection(){
+		return this.purchaseCollection;
+	}
+	
+	public void addToPurchaseColection(String purchaseKey, Purchase newPurchase) {
+		this.purchaseCollection.put(purchaseKey, newPurchase);
+	}
+	
+	public void deletePurchase(String purchaseKey) {
+		this.purchaseCollection.remove(purchaseKey);
 	}
 
 }

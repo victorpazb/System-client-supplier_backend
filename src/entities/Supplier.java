@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import collections.*;
@@ -67,29 +68,31 @@ public class Supplier implements Comparable<Supplier> {
 
 		SimpleProduct newProduct = new SimpleProduct(productName, productDescription, price);
 
-		this.collectionOfProducts.put(productName + " - " + productDescription, newProduct);
+		collection.addToProductColection(productName, productDescription, newProduct);
 
 	}
 
 	public void addCombo(String comboName, String comboDescription, double discountFactor, String productsOfCombo) {
 
-		String comboKey = comboName.trim() + " - " + comboDescription.trim(); //in the map of products the key is:  "NAME - DESCRIPTION"
-		
-		ArrayList<Product> listOfProducts = new ArrayList<>(); // ArrayList to put the products thtat will compose de the combo
-		
-		String[] productsKeyList = productsOfCombo.split(", "); // the combo keys are separeted for a comma and space ", "
-		
+		String comboKey = comboName.trim() + " - " + comboDescription.trim(); // in the map of products the key is:
+																				// "NAME - DESCRIPTION"
+
+		ArrayList<Product> listOfProducts = new ArrayList<>(); // ArrayList to put the products thtat will compose de
+																// the combo
+
+		String[] productsKeyList = productsOfCombo.split(", "); // the combo keys are separeted for a comma and space ",
+																// "
+
 		for (String productKey : productsKeyList) {
-			if(this.collectionOfProducts.containsKey(productKey)) {
+			if (this.collectionOfProducts.containsKey(productKey)) {
 				listOfProducts.add(this.collectionOfProducts.get(productKey));
 			}
 		}
-		
-		
+
 		ComboProduct newCombo = new ComboProduct(comboName, comboDescription, discountFactor, productsOfCombo,
 				listOfProducts);
 
-		this.collectionOfProducts.put(comboKey, newCombo);
+		collection.addToProductColection(comboName, comboDescription, newCombo);
 
 	}
 

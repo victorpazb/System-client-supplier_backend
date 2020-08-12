@@ -14,10 +14,10 @@ expectError "Erro ao cadastrar compra: cliente nao existe." adicionaCompra cpf=5
 expectError "Erro ao cadastrar compra: fornecedor nao existe." adicionaCompra cpf=58217738123 fornecedor="Helhao" data="03/02/2002" nome_prod="Batata frita" desc_prod="Porcao de batata frita"
 expectError "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo." adicionaCompra cpf=64269141198 fornecedor="" data="07/07/2007" nome_prod"Coca-coca" desc_prod="Coca-cola (lata)"
 expectError "Erro ao cadastrar compra: data invalida." adicionaCompra cpf=19418510068 fornecedor="Marcos" data="04/103/2018" nome_prod="Rubacao" desc_prod="Feijao com arroz e queijo coalho"
-expectError "Erro ao cadastrar compra: data nao pode ser vazia ou nula." adicionaCompra cpf=58217738123 fornecedor="" data="" nome_prod="Coxao com batata" desc_prod="Coxao de frango com batata frita"
+expectError "Erro ao cadastrar compra: data nao pode ser vazia ou nula." adicionaCompra cpf=58217738123 fornecedor="Seu Olavo" data="" nome_prod="Coxao com batata" desc_prod="Coxao de frango com batata frita"
 expectError "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo." adicionaCompra cpf=64269141198 fornecedor="Marcos" data="04/05/2008" nome_pro="" desc_prod="Porcao de batata frita"
 expectError "Erro ao cadastrar compra: produto nao existe." adicionaCompra cpf=19418510068 fornecedor="Seu Olavo" data="12/12/2004" nome_prod="Batata frita" desc_prod="Porcao de batata frita"
-expectError "Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula" adicionaCompra cpf=58217738123 fornecedor="Dona Alba" data="28/06/2007" nome_prod="Rubacao" desc_prod=""
+expectError "Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula." adicionaCompra cpf=58217738123 fornecedor="Dona Alba" data="28/06/2007" nome_prod="Rubacao" desc_prod=""
 expectError "Erro ao cadastrar compra: produto nao existe." adicionaCompra cpf=64269141198 fornecedor="Seu Olavo" data="22/11/2009" nome_prod="Coca-cola" desc_prod="Coca-cola (garrafa)"
 
 

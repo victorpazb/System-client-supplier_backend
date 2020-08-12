@@ -366,16 +366,104 @@ public interface ErrorChecker {
 
 		String comboKey = comboName + " - " + comboDescription;
 		Supplier supplier = supplierCollection.get(supplierName);
-		
+
 		if (!supplier.getSupplierProducts().containsKey(comboKey)) {
 			throw new NullPointerException("Erro na edicao de combo: produto nao existe.");
 		}
-		
-		
+
 		Product combo = supplier.getSupplierProducts().get(comboKey);
- 		if(!(combo instanceof ComboProduct)) {
-			 throw new ClassCastException("Erro na edicao de combo: produto nao eh um combo.");
+		if (!(combo instanceof ComboProduct)) {
+			throw new ClassCastException("Erro na edicao de combo: produto nao eh um combo.");
 		}
+	}
+
+	// =========================== USE CASE 5 =========================
+
+	static void adicionaCombo(String clientCpf, String supplierName, String date, String productName,
+			String productDescription, HashMap<String, Client> clientCollection,
+			HashMap<String, Product> productCollection, HashMap<String, Supplier> supplierCollection) {
+
+		// IllegalArgumentoExceptions
+
+		if (clientCpf.trim().length() != 11) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: cpf invalido.");
+		}
+
+		if (clientCpf.trim().equals("") || clientCpf == null) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: cpf nao pode ser vazio ou nulo.");
+		}
+
+		if (supplierName.trim().equals("") || supplierName == null) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
+		}
+
+		if (productName.trim().equals("") || productName == null) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
+		}
+
+		if (productDescription.trim().equals("") || productDescription == null) {
+			throw new IllegalArgumentException(
+					"Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula.");
+		}
+
+		if (date.trim().equals("") || date == null) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
+		}
+
+		String[] arrayDate = date.split("/");
+		if (arrayDate[0].length() != 2 || arrayDate[1].length() != 2 || arrayDate[2].length() != 4) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
+		}
+
+		// NullPointerExceptions
+
+		if (!clientCollection.containsKey(clientCpf)) {
+			throw new NullPointerException("Erro ao cadastrar compra: cliente nao existe.");
+		}
+
+		if (!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("Erro ao cadastrar compra: fornecedor nao existe.");
+		}
+
+		Supplier supplier = supplierCollection.get(supplierName);
+
+		if (!supplier.getSupplierProducts().containsKey(productName + " - " + productDescription)) {
+			throw new NullPointerException("Erro ao cadastrar compra: produto nao existe.");
+		}
+
+	}
+
+	static void getDebito(String clientCpf, String supplierName, HashMap<String, Client> clientCollection,
+			HashMap<String, Supplier> supplierCollection) {
+
+		// IllegalArgumentException
+		if (clientCpf.trim().length() != 11) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: cpf invalido.");
+		}
+
+		if (clientCpf.trim().equals("") || clientCpf == null) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: cpf nao pode ser vazio ou nulo.");
+		}
+
+		if (supplierName.trim().equals("") || supplierName == null) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.");
+		}
+
+		// NullPointerException
+		if (!clientCollection.containsKey(clientCpf)) {
+			throw new NullPointerException("Erro ao recuperar debito: cliente nao existe.");
+		}
+
+		if (!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("Erro ao recuperar debito: fornecedor nao existe.");
+		}
+
+		// No debits
+
+		if (clientCollection.get(clientCpf).getDebito(supplierName).equals("0.00")) {
+			throw new NullPointerException("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
+		}
+
 	}
 
 }
