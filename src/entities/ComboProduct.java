@@ -23,7 +23,6 @@ public class ComboProduct extends Product implements Comparable<Product> {
 
 	}
 
-
 	/**
 	 * Calculates the price of the combo with NO discount. Just adding the price of
 	 * products that compose it
@@ -49,7 +48,17 @@ public class ComboProduct extends Product implements Comparable<Product> {
 		return priceWithDiscount;
 	}
 
-
-
+	/**
+	 * When we set a new discount factor, we should set the new price (doing that in
+	 * second line of method), otherwise the price will remain the price that was
+	 * with the older discountFactor
+	 * 
+	 * @param newFactor - double number wich will determinate the final price of the
+	 *                  comboProduct
+	 */
+	public void setFactor(double newFactor) {
+		this.discountFactor = newFactor;
+		this.setPrice(calculatingPriceWithDiscount(this.discountFactor));
+	}
 
 }

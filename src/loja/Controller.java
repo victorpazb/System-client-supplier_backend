@@ -260,4 +260,19 @@ public class Controller {
 
 	}
 
+	public void editaCombo(String comboName, String comboDescription, String supplierName, double newDiscountFactor) {
+		ErrorChecker.editaCombo(comboName, comboDescription, supplierName, newDiscountFactor,
+				this.collections.getSupplierCollection());
+
+		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
+		String comboKey = comboName + " - " + comboDescription;
+
+		Product combo = supplier.getSupplierProducts().get(comboKey);
+
+		if (combo instanceof ComboProduct) {
+			((ComboProduct) combo).setFactor(newDiscountFactor);
+		}
+
+	}
+
 }

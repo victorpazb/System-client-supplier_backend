@@ -341,4 +341,41 @@ public interface ErrorChecker {
 
 	}
 
+	static void editaCombo(String comboName, String comboDescription, String supplierName, double newDiscountFactor,
+			HashMap<String, Supplier> supplierCollection) {
+
+		if (comboName.trim().equals("") || comboName == null) {
+			throw new IllegalArgumentException("Erro na edicao de combo: nome nao pode ser vazio ou nulo.");
+		}
+
+		if (comboDescription.trim().equals("") || comboDescription == null) {
+			throw new IllegalArgumentException("Erro na edicao de combo: descricao nao pode ser vazia ou nula.");
+		}
+
+		if (supplierName.trim().equals("") || supplierName == null) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fornecedor nao pode ser vazio ou nulo.");
+		}
+
+		if (newDiscountFactor <= 0 || newDiscountFactor >= 1) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fator invalido.");
+		}
+
+		if (!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("Erro na edicao de combo: fornecedor nao existe.");
+		}
+
+		String comboKey = comboName + " - " + comboDescription;
+		Supplier supplier = supplierCollection.get(supplierName);
+		
+		if (!supplier.getSupplierProducts().containsKey(comboKey)) {
+			throw new NullPointerException("Erro na edicao de combo: produto nao existe.");
+		}
+		
+		
+		Product combo = supplier.getSupplierProducts().get(comboKey);
+ 		if(!(combo instanceof ComboProduct)) {
+			 throw new ClassCastException("Erro na edicao de combo: produto nao eh um combo.");
+		}
+	}
+
 }

@@ -98,6 +98,10 @@ public class Facade {
 		controle.adicionaCombo(supplierName, comboName, comboDescription, discountFactor, productsOfCombo);
 	}
 	
+	public void editaCombo(String comboName, String comboDescription, String supplierName, double newDiscountFactor) {
+		controle.editaCombo(comboName, comboDescription, supplierName, newDiscountFactor);
+	}
+	
 	
 	
 	
