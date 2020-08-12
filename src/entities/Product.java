@@ -10,14 +10,19 @@ public abstract class Product implements Comparable<Product> {
 		this.productDescription = productDescription;
 		this.price = price;
 	}
-	
-	public String getKey() {
-		return this.productName + " - " + this.productDescription;
+
+	public String getName() {
+		return this.productName;
 	}
-	
+
+	public String getKey() {
+		return this.productName; // + " - " + this.productDescription;
+	}
+
 	public double getPrice() {
 		return this.price;
 	}
+
 	public void setPrice(double newPrice) {
 		this.price = newPrice;
 	}
@@ -36,13 +41,7 @@ public abstract class Product implements Comparable<Product> {
 
 	@Override
 	public int compareTo(Product otherProduct) {
-		if (productKey().compareTo(otherProduct.productKey()) > 0) {
-			return 1;
-		} else if (productKey().compareTo(otherProduct.productKey()) < 0) {
-			return -1;
-		} else {
-			return 0;
-		}
+		return this.productName.compareTo(otherProduct.getName()); //product is sorted by the name of product
 
 	}
 

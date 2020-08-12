@@ -85,9 +85,6 @@ public class Controller {
 		ErrorChecker.removeCliente(clientCpf, this.collections.getClientCollection());
 		collections.deleteClient(clientCpf);
 	}
-	
-	
-	
 
 	// ============================= USE CASE 2 ===================================
 
@@ -151,14 +148,11 @@ public class Controller {
 		ErrorChecker.removeFornecedor(supplierName, this.collections.getSupplierCollection());
 		this.collections.getSupplierCollection().remove(supplierName);
 	}
-	
-	
-	
 
 	// ========================= USE CASE 3 =================================
 
 	private String productKey(String productName, String productDescription) {
-		return productName + " - " + productDescription;
+		return productName.trim() + " - " + productDescription.trim();
 	}
 
 	public void adicionaProduto(String supplierName, String productName, String productDescription, double price) {
@@ -246,34 +240,24 @@ public class Controller {
 		ErrorChecker.removeProduto(productName, productDescription, supplierName,
 				this.collections.getSupplierCollection());
 
-		Supplier supplier = this.collections.getSupplierCollection().get(supplierName); //GET SUPPLIER 
+		Supplier supplier = this.collections.getSupplierCollection().get(supplierName); // GET SUPPLIER
 		String productKey = productKey(productName, productDescription); // GET PRODCUT KEY
 
-		
-		supplier.getSupplierProducts().remove(productKey); //REMOVE PRODUCT
+		supplier.getSupplierProducts().remove(productKey); // REMOVE PRODUCT
 
 	}
 
-	
 	// =============================== USE CASE 4 ===============================
-	
-	
+
 	public void adicionaCombo(String supplierName, String comboName, String comboDescription, double discountFactor,
 			String productsOfCombo) {
-		
-		//ErrorChecker.adicionaCombo.
-		
+
+		ErrorChecker.adicionaCombo(supplierName, comboName.trim(), comboDescription.trim(), discountFactor,
+				productsOfCombo, this.collections.getSupplierCollection());
+
 		Supplier supplier = this.collections.getSupplierCollection().get(supplierName);
 		supplier.addCombo(comboName, comboDescription, discountFactor, productsOfCombo);
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

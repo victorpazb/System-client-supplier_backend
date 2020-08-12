@@ -276,13 +276,10 @@ public interface ErrorChecker {
 			throw new IllegalArgumentException("Erro na remocao de produto: fornecedor nao pode ser vazio ou nulo.");
 		}
 
-		
-		
-		
 		if (!supplierCollection.containsKey(supplierName)) {
 			throw new NullPointerException("Erro na remocao de produto: fornecedor nao existe.");
 
-		 } else {
+		} else {
 
 			Supplier supplier = supplierCollection.get(supplierName);
 			String productKey = productName + " - " + productDescription;
@@ -293,8 +290,55 @@ public interface ErrorChecker {
 		}
 
 	}
-	
-	
+
 	// =============================== USE CASE 4 ===============================
+
+	static void adicionaCombo(String supplierName, String comboName, String comboDescription, double discountFactor,
+			String productsOfCombo, HashMap<String, Supplier> supplierCollection) {
+
+		if (supplierName.trim().equals("") || supplierName == null) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: fornecedor nao pode ser vazio ou nulo.");
+		}
+
+		if (!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("Erro no cadastro de combo: fornecedor nao existe.");
+		}
+
+		if (comboName.trim().equals("") || comboName == null) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
+		}
+
+		if (comboDescription.trim().equals("") || comboDescription == null) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: descricao nao pode ser vazia ou nula.");
+		}
+
+		if (discountFactor < 0 || discountFactor >= 1.0) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: fator invalido.");
+		}
+
+		if (productsOfCombo.trim().equals("") || productsOfCombo == null) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: combo deve ter produtos.");
+		}
+
+		String[] arrayProductsKey = productsOfCombo.split(", ");
+		Supplier supplier = supplierCollection.get(supplierName);
+
+		for (int i = 0; i < arrayProductsKey.length; i++) {
+			if (!supplier.getSupplierProducts().containsKey(arrayProductsKey[i])) {
+				throw new NullPointerException("Erro no cadastro de combo: produto nao existe.");
+			}
+
+			if (arrayProductsKey[i].contains("+")) {
+				throw new IllegalArgumentException(
+						"Erro no cadastro de combo: um combo nao pode possuir combos na lista de produtos.");
+			}
+		}
+
+		String comboKey = comboName + " - " + comboDescription;
+		if (supplier.getSupplierProducts().containsKey(comboKey)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: combo ja existe.");
+		}
+
+	}
 
 }

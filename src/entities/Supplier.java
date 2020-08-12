@@ -73,7 +73,7 @@ public class Supplier implements Comparable<Supplier> {
 
 	public void addCombo(String comboName, String comboDescription, double discountFactor, String productsOfCombo) {
 
-		String comboKey = comboName + " - " + comboDescription; //in the map of products the key is:  "NAME - DESCRIPTION"
+		String comboKey = comboName.trim() + " - " + comboDescription.trim(); //in the map of products the key is:  "NAME - DESCRIPTION"
 		
 		ArrayList<Product> listOfProducts = new ArrayList<>(); // ArrayList to put the products thtat will compose de the combo
 		
