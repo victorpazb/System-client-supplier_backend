@@ -324,10 +324,12 @@ public class Controller {
 
 	public String exibeContasClientes(String clientCpf) {
 	
+		ErrorChecker.exibeContasClientes(clientCpf, this.collections.getClientCollection());
 		
 		Client client = collections.getClientCollection().get(clientCpf);
-		
 		return client.exibeContas();
 	}
+	
+	// ========================= USE CASE 6 ==========================
 
 }

@@ -503,12 +503,31 @@ public interface ErrorChecker {
 				noDebitWithThisSupplier = false;
 			}
 		}
-		
+
 		if (noDebitWithThisSupplier) {
-			throw new NullPointerException("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
+			throw new NullPointerException(
+					"Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
 		}
 
-		
+	}
+
+	static void exibeContasClientes(String clientCpf, HashMap<String, Client> clientCollection) {
+
+		// IllegalArgumentException
+		if (clientCpf.length() != 11) {
+			throw new IllegalArgumentException("Erro ao exibir contas do cliente: cpf invalido.");
+		}
+
+		// NullPointerException
+		if (!clientCollection.containsKey(clientCpf)) {
+			throw new NullPointerException("Erro ao exibir contas do cliente: cliente nao existe.");
+		}
+
+		//No debits
+		Client client = clientCollection.get(clientCpf);
+		if (client.getPurchaseCollection().isEmpty()) {
+			throw new NullPointerException("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.");
+		}
 
 	}
 
