@@ -1,6 +1,6 @@
 package entities;
 
-public class Purchase {
+public class Purchase implements Comparable<Purchase> {
 
 	private String supplierName, dateOfPurchase, productName, productDescription;
 	private double priceOfPurchase;
@@ -23,4 +23,31 @@ public class Purchase {
 		return this.supplierName;
 	}
 
+	public String getName() {
+		return this.productName;
+	}
+
+	public String getDate() {
+		return this.dateOfPurchase;
+	}
+
+	public String getDescription() {
+		return this.productDescription;
+	}
+
+	@Override
+	public String toString() {
+		return this.productName + " - " + this.dateOfPurchase.replace("/", "-");
+	}
+
+	@Override
+	public int compareTo(Purchase otherPurchase) {
+		
+		if (!this.dateOfPurchase.equals(otherPurchase.getDate())) {
+			return this.productName.compareTo(otherPurchase.getName());
+		}
+		
+		return this.productDescription.compareTo(otherPurchase.getDescription()) * (-1);
+
+	}
 }

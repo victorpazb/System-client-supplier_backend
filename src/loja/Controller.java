@@ -305,9 +305,20 @@ public class Controller {
 	public String getDebito(String clientCpf, String supplierName) {
 		ErrorChecker.getDebito(clientCpf, supplierName, this.collections.getClientCollection(),
 				this.collections.getSupplierCollection());
+
 		Client client = this.collections.getClientCollection().get(clientCpf);
 
 		return client.getDebito(supplierName);
+
+	}
+
+	public String exibeContas(String clientCpf, String supplierName) {
+
+		ErrorChecker.exibeContas(clientCpf, supplierName, this.collections.getClientCollection(),
+				this.collections.getSupplierCollection());
+		Client client = collections.getClientCollection().get(clientCpf);
+		
+		return client.exibeConta(supplierName);
 
 	}
 

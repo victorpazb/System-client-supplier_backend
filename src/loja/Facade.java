@@ -103,5 +103,9 @@ public class Facade {
 	public String getDebito(String clientCpf, String supplierName) {
 		return controle.getDebito(clientCpf, supplierName);
 	}
+	
+	public String exibeContas(String clientCpf, String supplierName) {
+		return controle.exibeContas(clientCpf, supplierName);
+	}
 
 }

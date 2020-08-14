@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import collections.*;
 
@@ -37,6 +39,10 @@ public class Client implements Comparable<Client> {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public HashMap<String, Purchase> getPurchaseCollection() {
+		return this.purchaseCollection;
 	}
 
 	public void addPurchase(String supplierName, String dateOfPurchase, String productName, String productDescription,
@@ -84,6 +90,24 @@ public class Client implements Comparable<Client> {
 		}
 
 		return String.format("%.2f", debit).replace(",", ".");
+
+	}
+
+	public String exibeConta(String supplierName) {
+
+		ArrayList<Purchase> purchaseList = new ArrayList<>();
+		purchaseList.addAll(this.purchaseCollection.values());
+		Collections.sort(purchaseList);
+
+		String clientPurchasesBySupplier = "Cliente: " + this.name + " | " + supplierName + " | ";
+
+		for (Purchase purchase : purchaseList) {
+			if (purchase.getSupplier().equals(supplierName)) {
+				clientPurchasesBySupplier += purchase.toString() + " | ";
+			}
+		}
+
+		return clientPurchasesBySupplier.substring(0, clientPurchasesBySupplier.length() - 3);
 
 	}
 

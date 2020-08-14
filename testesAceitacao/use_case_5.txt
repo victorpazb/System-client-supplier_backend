@@ -45,7 +45,7 @@ expect "Cliente: Ana Amari | Seu Olavo | Suco - 02-04-2015" exibeContas cpf=6426
 expectError "Erro ao exibir conta do cliente: cpf invalido." exibeContas cpf=19274 fornecedor="Seu Olavo"
 expectError "Erro ao exibir conta do cliente: cliente nao existe." exibeContas cpf=84969141198 fornecedor="Seu Olavo"
 expectError "Erro ao exibir conta do cliente: fornecedor nao pode ser vazio ou nulo." exibeContas cpf=58217738123 fornecedor=""
-expectError "Erro ao exibir conta do cliente: fornecedor nao existe." exibeContas cpf=64269141198 fornecedor="Anel universitario"
+expectError "Erro ao exibir conta do cliente: fornecedor nao existe." exibeContas cpf=64269141198 fornecedor="                       Anel universitario"
 expectError "Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor." exibeContas cpf=19418510068 fornecedor="Dona Alba"
 
 ## Exibindo contas clientes ##

@@ -1,5 +1,6 @@
 package exceptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import entities.*;
 
@@ -463,6 +464,51 @@ public interface ErrorChecker {
 		if (clientCollection.get(clientCpf).getDebito(supplierName).equals("0.00")) {
 			throw new NullPointerException("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
 		}
+
+	}
+
+	static void exibeContas(String clientCpf, String supplierName, HashMap<String, Client> clientCollection,
+			HashMap<String, Supplier> supplierCollection) {
+
+		// IllegalArgumentException
+
+		if (clientCpf.length() != 11 || clientCpf.trim().equals("")) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cpf invalido.");
+		}
+
+		if (supplierName.trim().equals("")) {
+			throw new IllegalArgumentException(
+					"Erro ao exibir conta do cliente: fornecedor nao pode ser vazio ou nulo.");
+		}
+
+		// NullPointerException
+
+		if (!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("Erro ao exibir conta do cliente: fornecedor nao existe.");
+		}
+
+		if (!clientCollection.containsKey(clientCpf)) {
+			throw new NullPointerException("Erro ao exibir conta do cliente: cliente nao existe.");
+		}
+
+		// No debit
+
+		Client client = clientCollection.get(clientCpf); // the client to be checked if have any debits
+		ArrayList<Purchase> purchaseList = new ArrayList<>(); // creating a list to put all purchases of client
+		purchaseList.addAll(client.getPurchaseCollection().values()); // puting all the purchases on the list
+
+		boolean noDebitWithThisSupplier = true;
+		for (Purchase purchase : purchaseList) {
+			if (purchase.getSupplier().equals(supplierName)) {
+				noDebitWithThisSupplier = false;
+			}
+		}
+		
+		if (noDebitWithThisSupplier) {
+			throw new NullPointerException("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
+		}
+
+		
 
 	}
 
