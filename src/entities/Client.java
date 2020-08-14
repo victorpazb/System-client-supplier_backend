@@ -2,7 +2,6 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 
 import collections.*;
@@ -23,6 +22,7 @@ public class Client implements Comparable<Client> {
 		this.collection = new CollectionsOfObjects();
 		this.clientPurchaseControl = new HashMap<>();
 		this.purchaseCollection = this.collection.getPurchaseCollection();
+
 	}
 
 	public String getCpf() {
@@ -97,6 +97,9 @@ public class Client implements Comparable<Client> {
 		}
 		return 0;
 	}
+	
+	
+	
 
 	/**
 	 * @param supplierName - String to pick the desired supplier
@@ -105,15 +108,22 @@ public class Client implements Comparable<Client> {
 	public String getDebito(String supplierName) {
 
 		double debit = 0;
-		for (Purchase purchase : this.purchaseCollection.values()) {
-			if (purchase.getSupplier().equals(supplierName)) {
+		ArrayList<Purchase> purchaseList = new ArrayList<>(); 
+		
+		purchaseList = this.clientPurchaseControl.get(supplierName);
+		
+		if(purchaseList != null) {
+			for (Purchase purchase : purchaseList) {
 				debit += purchase.getPrice();
 			}
 		}
-
+		
+		
 		return String.format("%.2f", debit).replace(",", ".");
 
 	}
+	
+	
 
 	public String exibeConta(String supplierName) {
 
@@ -147,9 +157,16 @@ public class Client implements Comparable<Client> {
 				clientPurchasesBySupplier += purchase.toString() + " | ";
 			}
 		}
-		
+
 		return clientPurchasesBySupplier.substring(0, clientPurchasesBySupplier.length() - 3);
 
+	}
+
+	public void realizaPagamento(String supplierName) {
+
+		this.clientPurchaseControl.get(supplierName).clear(); // My purchase control does not have the bill anymore but remain booked
+
+		
 	}
 
 }

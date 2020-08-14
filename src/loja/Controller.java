@@ -317,19 +317,30 @@ public class Controller {
 		ErrorChecker.exibeContas(clientCpf, supplierName, this.collections.getClientCollection(),
 				this.collections.getSupplierCollection());
 		Client client = collections.getClientCollection().get(clientCpf);
-		
+
 		return client.exibeConta(supplierName);
 
 	}
-
-	public String exibeContasClientes(String clientCpf) {
 	
+	public String exibeContasClientes(String clientCpf) {
+
 		ErrorChecker.exibeContasClientes(clientCpf, this.collections.getClientCollection());
-		
+
 		Client client = collections.getClientCollection().get(clientCpf);
 		return client.exibeContas();
 	}
-	
+
 	// ========================= USE CASE 6 ==========================
+	
+	public void realizaPagamento(String clientCpf, String supplierName) {
+		
+		
+		ErrorChecker.realizaPagamento(clientCpf, supplierName, this.collections.getClientCollection(), this.collections.getSupplierCollection());
+		
+		Client client = this.collections.getClientCollection().get(clientCpf);
+		client.realizaPagamento(supplierName);
+	}
+	
+	// ========================= USE CASE 7 =============================
 
 }

@@ -494,17 +494,13 @@ public interface ErrorChecker {
 		// No debit
 
 		Client client = clientCollection.get(clientCpf); // the client to be checked if have any debits
-		ArrayList<Purchase> purchaseList = new ArrayList<>(); // creating a list to put all purchases of client
-		purchaseList.addAll(client.getPurchaseCollection().values()); // puting all the purchases on the list
 
-		boolean noDebitWithThisSupplier = true;
-		for (Purchase purchase : purchaseList) {
-			if (purchase.getSupplier().equals(supplierName)) {
-				noDebitWithThisSupplier = false;
+		if (client.getClientPurchaseControl().containsKey(supplierName)) {
+			if (client.getClientPurchaseControl().get(supplierName).isEmpty()) {
+				throw new NullPointerException(
+						"Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
 			}
-		}
-
-		if (noDebitWithThisSupplier) {
+		} else {
 			throw new NullPointerException(
 					"Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
 		}
@@ -523,11 +519,60 @@ public interface ErrorChecker {
 			throw new NullPointerException("Erro ao exibir contas do cliente: cliente nao existe.");
 		}
 
-		//No debits
+		// No debits
 		Client client = clientCollection.get(clientCpf);
 		if (client.getPurchaseCollection().isEmpty()) {
 			throw new NullPointerException("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.");
 		}
+
+	}
+
+	// ============================== USE CASE 6 ==========================
+
+	static void realizaPagamento(String clientCpf, String supplierName, HashMap<String, Client> clientCollection,
+			HashMap<String, Supplier> supplierCollection) {
+
+		// IllegalArgumentException
+
+		if (clientCpf.trim().equals("") || clientCpf == null) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: cpf nao pode ser vazio ou nulo.");
+		}
+
+		if (supplierName.trim().equals("") || supplierName == null) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.");
+		}
+
+		if (clientCpf.length() != 11) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: cpf invalido.");
+		}
+
+		// NullPointerException
+		if (!supplierCollection.containsKey(supplierName)) {
+			throw new NullPointerException("Erro no pagamento de conta: fornecedor nao existe.");
+		}
+
+		if (!clientCollection.containsKey(clientCpf)) {
+			throw new NullPointerException("Erro no pagamento de conta: cliente nao existe.");
+		}
+
+		Client client = clientCollection.get(clientCpf);
+
+		if (!client.getClientPurchaseControl().containsKey(supplierName)) {
+			throw new NullPointerException(
+					"Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");
+		}
+
+		if (client.getClientPurchaseControl().get(supplierName).isEmpty()) {
+			throw new IllegalArgumentException(
+					"Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");
+		}
+
+		if (!client.getClientPurchaseControl().containsKey(supplierName)) {
+			throw new NullPointerException(
+					"Erro no pagamento de conta: cliente nao tem nenhuma conta com o fornecedor.");
+		}
+		
+		// ========================= USE CASE 7 =====================================
 
 	}
 

@@ -17,9 +17,9 @@ expect 5.00 getDebito cpf=64269141198 fornecedor="Marcos"
 
 expectError "Erro no pagamento de conta: cpf invalido." realizaPagamento cpf=120151 fornecedor="Seu Olavo"
 expectError "Erro no pagamento de conta: cpf nao pode ser vazio ou nulo." realizaPagamento cpf="" fornecedor="Seu Olavo"
-expectError "Erro no pagamento de conta: cpf nao pode ser vazio ou nulo." realizaPagamento cpf=  fornecedor="Seu Olavo"
+expectError "Erro no pagamento de conta: cpf nao pode ser vazio ou nulo." realizaPagamento cpf=""  fornecedor="Seu Olavo"
 expectError "Erro no pagamento de conta: cliente nao existe." realizaPagamento cpf=12312312312 fornecedor="Dona Alba"
-expectError "Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo." realizaPagamento cpf=19418510068 fornecedor=
+expectError "Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo." realizaPagamento cpf=19418510068 fornecedor=""
 expectError "Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo." realizaPagamento cpf=19418510068 fornecedor=""
 expectError "Erro no pagamento de conta: fornecedor nao existe." realizaPagamento cpf=19418510068 fornecedor="Ze do Brownie"
 expectError "Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor." realizaPagamento cpf=64269141198 fornecedor="Dona Alba"
