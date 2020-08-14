@@ -107,5 +107,9 @@ public class Facade {
 	public String exibeContas(String clientCpf, String supplierName) {
 		return controle.exibeContas(clientCpf, supplierName);
 	}
+	
+	public String exibeContasClientes(String clientCpf) {
+		return controle.exibeContasClientes(clientCpf);
+	}
 
 }

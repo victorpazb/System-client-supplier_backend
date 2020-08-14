@@ -322,4 +322,12 @@ public class Controller {
 
 	}
 
+	public String exibeContasClientes(String clientCpf) {
+	
+		
+		Client client = collections.getClientCollection().get(clientCpf);
+		
+		return client.exibeContas();
+	}
+
 }

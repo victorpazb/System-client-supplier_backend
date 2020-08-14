@@ -3,6 +3,8 @@ package entities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+
+
 import collections.*;
 
 public class Client implements Comparable<Client> {
@@ -111,4 +113,7 @@ public class Client implements Comparable<Client> {
 
 	}
 
+	public String exibeContas() {
+		return "pensar!";
+	}
 }
