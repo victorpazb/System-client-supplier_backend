@@ -57,7 +57,7 @@ public class Client implements Comparable<Client> {
 			double priceOfPurchase) {
 
 		Purchase newPurchase = new Purchase(supplierName, dateOfPurchase, productName, productDescription,
-				priceOfPurchase);
+				priceOfPurchase, this.cpf);
 
 		this.purchaseCollection.put(productName + " - " + productDescription, newPurchase);
 
@@ -97,9 +97,6 @@ public class Client implements Comparable<Client> {
 		}
 		return 0;
 	}
-	
-	
-	
 
 	/**
 	 * @param supplierName - String to pick the desired supplier
@@ -108,22 +105,19 @@ public class Client implements Comparable<Client> {
 	public String getDebito(String supplierName) {
 
 		double debit = 0;
-		ArrayList<Purchase> purchaseList = new ArrayList<>(); 
-		
+		ArrayList<Purchase> purchaseList = new ArrayList<>();
+
 		purchaseList = this.clientPurchaseControl.get(supplierName);
-		
-		if(purchaseList != null) {
+
+		if (purchaseList != null) {
 			for (Purchase purchase : purchaseList) {
 				debit += purchase.getPrice();
 			}
 		}
-		
-		
+
 		return String.format("%.2f", debit).replace(",", ".");
 
 	}
-	
-	
 
 	public String exibeConta(String supplierName) {
 
@@ -164,9 +158,9 @@ public class Client implements Comparable<Client> {
 
 	public void realizaPagamento(String supplierName) {
 
-		this.clientPurchaseControl.get(supplierName).clear(); // My purchase control does not have the bill anymore but remain booked
+		this.clientPurchaseControl.get(supplierName).clear(); // My purchase control does not have the bill anymore but
+																// remain booked
 
-		
 	}
 
 }

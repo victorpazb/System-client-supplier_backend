@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import collections.*;
 import entities.*;
 import exceptions.*;
@@ -344,9 +346,14 @@ public class Controller {
 
 	public void ordenaPor(String criterio) {
 
+		ArrayList<Client> listarComprasCollection = new ArrayList<>();
+		listarComprasCollection.addAll(this.collections.getClientCollection().values());
+		Collections.sort(listarComprasCollection);
+
 		switch (criterio.trim()) {
 
 		case "Cliente":
+			listarCompras();
 			break;
 
 		case "Fornecedor":
@@ -364,32 +371,28 @@ public class Controller {
 
 	public String listarCompras() {
 
-		ArrayList<Client> listarComprasCollection = new ArrayList<>();
-		listarComprasCollection.addAll(this.collections.getClientCollection().values());
-		
-		
 		String saida = "";
-		for (int j = 0; j < listarComprasCollection.size(); j++) {
-			System.out.println(j);
-			Client client = listarComprasCollection.get(j);
 
-			ArrayList<String> suppliers = new ArrayList<>();
-			suppliers.addAll(client.getClientPurchaseControl().keySet());
+		ArrayList<Client> clientList = new ArrayList<>();
+		clientList.addAll(this.collections.getClientCollection().values());
+		Collections.sort(clientList);
 
-			for (int i = 0; i < client.getClientPurchaseControl().size(); i++) {
+		for (Client client : clientList) {
 
-				ArrayList<Purchase> list = new ArrayList<>();
-				list = client.getClientPurchaseControl().get(i);
-				for (Purchase purchase : list) {
-					saida += client.getName() + ", " + suppliers.get(i) + ", " + purchase.toString() + " | ";
+			ArrayList<Purchase> purchaseList = new ArrayList<>();
+			purchaseList.addAll(client.getPurchaseCollection().values());
 
-				}
+			Collections.sort(purchaseList);
+
+			for (Purchase purchase : purchaseList) {
+
+				saida += client.getName() + ", " + purchase.getSupplier() + ", " + purchase.toString2() + " | ";
 
 			}
-
 		}
 
-		return saida;
-	}
+		// Amigao Fernandes, Marcos, Coxao de frango com cheddar, 08/11/2018
 
+		return saida.substring(0, saida.length() - 3);
+	}
 }
