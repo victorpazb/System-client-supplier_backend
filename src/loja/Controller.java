@@ -1,7 +1,6 @@
 package loja;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -321,7 +320,7 @@ public class Controller {
 		return client.exibeConta(supplierName);
 
 	}
-	
+
 	public String exibeContasClientes(String clientCpf) {
 
 		ErrorChecker.exibeContasClientes(clientCpf, this.collections.getClientCollection());
@@ -331,16 +330,66 @@ public class Controller {
 	}
 
 	// ========================= USE CASE 6 ==========================
-	
+
 	public void realizaPagamento(String clientCpf, String supplierName) {
-		
-		
-		ErrorChecker.realizaPagamento(clientCpf, supplierName, this.collections.getClientCollection(), this.collections.getSupplierCollection());
-		
+
+		ErrorChecker.realizaPagamento(clientCpf, supplierName, this.collections.getClientCollection(),
+				this.collections.getSupplierCollection());
+
 		Client client = this.collections.getClientCollection().get(clientCpf);
 		client.realizaPagamento(supplierName);
 	}
-	
+
 	// ========================= USE CASE 7 =============================
+
+	public void ordenaPor(String criterio) {
+
+		switch (criterio.trim()) {
+
+		case "Cliente":
+			break;
+
+		case "Fornecedor":
+			break;
+
+		case "Data":
+			break;
+
+		default:
+			ErrorChecker.ordenaPor(criterio);
+
+		}
+
+	}
+
+	public String listarCompras() {
+
+		ArrayList<Client> listarComprasCollection = new ArrayList<>();
+		listarComprasCollection.addAll(this.collections.getClientCollection().values());
+		
+		
+		String saida = "";
+		for (int j = 0; j < listarComprasCollection.size(); j++) {
+			System.out.println(j);
+			Client client = listarComprasCollection.get(j);
+
+			ArrayList<String> suppliers = new ArrayList<>();
+			suppliers.addAll(client.getClientPurchaseControl().keySet());
+
+			for (int i = 0; i < client.getClientPurchaseControl().size(); i++) {
+
+				ArrayList<Purchase> list = new ArrayList<>();
+				list = client.getClientPurchaseControl().get(i);
+				for (Purchase purchase : list) {
+					saida += client.getName() + ", " + suppliers.get(i) + ", " + purchase.toString() + " | ";
+
+				}
+
+			}
+
+		}
+
+		return saida;
+	}
 
 }

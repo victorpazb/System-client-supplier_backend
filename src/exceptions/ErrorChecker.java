@@ -571,8 +571,20 @@ public interface ErrorChecker {
 			throw new NullPointerException(
 					"Erro no pagamento de conta: cliente nao tem nenhuma conta com o fornecedor.");
 		}
-		
+
 		// ========================= USE CASE 7 =====================================
+
+	}
+
+	static void ordenaPor(String criterio) {
+
+		if (!criterio.trim().equals("") && !criterio.trim().equals("criterio")) {
+			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao oferecido pelo sistema.");
+		}
+
+		if (criterio.trim().equals("")) {
+			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao pode ser vazio ou nulo.");
+		}
 
 	}
 
