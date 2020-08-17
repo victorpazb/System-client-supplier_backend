@@ -2,6 +2,7 @@ package loja;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import javax.swing.text.StyledEditorKit.ForegroundAction;
@@ -13,9 +14,11 @@ import exceptions.*;
 public class Controller {
 
 	private CollectionsOfObjects collections;
+	private ArrayList<Purchase> allPurchases;
 
 	public Controller() {
 		this.collections = new CollectionsOfObjects();
+		this.allPurchases = new ArrayList<>();
 
 	}
 
@@ -346,20 +349,44 @@ public class Controller {
 
 	public void ordenaPor(String criterio) {
 
-		ArrayList<Client> listarComprasCollection = new ArrayList<>();
-		listarComprasCollection.addAll(this.collections.getClientCollection().values());
-		Collections.sort(listarComprasCollection);
+		for (Client client : this.collections.getClientCollection().values()) {
+			this.allPurchases.addAll(client.getPurchaseCollection().values());
+		}
+		this.allPurchases.addAll(this.collections.getPurchaseCollection().values());
 
 		switch (criterio.trim()) {
 
 		case "Cliente":
-			listarCompras();
+			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
+
+				@Override
+				public int compare(Purchase purchase1, Purchase purchase2) {
+					return purchase1.getClientName().compareTo(purchase2.getClientName());
+				}
+
+			});
 			break;
 
 		case "Fornecedor":
+			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
+
+				@Override
+				public int compare(Purchase purchase1, Purchase purchase2) {
+					return purchase1.getSupplier().compareTo(purchase2.getSupplier());
+				}
+
+			});
 			break;
 
 		case "Data":
+			Collections.sort(allPurchases, new Comparator<Purchase>() {
+
+				@Override
+				public int compare(Purchase purchase1, Purchase purchase2) {
+					return purchase1.getDate().compareTo(purchase2.getDate());
+				}
+
+			});
 			break;
 
 		default:
@@ -373,22 +400,8 @@ public class Controller {
 
 		String saida = "";
 
-		ArrayList<Client> clientList = new ArrayList<>();
-		clientList.addAll(this.collections.getClientCollection().values());
-		Collections.sort(clientList);
-
-		for (Client client : clientList) {
-
-			ArrayList<Purchase> purchaseList = new ArrayList<>();
-			purchaseList.addAll(client.getPurchaseCollection().values());
-
-			Collections.sort(purchaseList);
-
-			for (Purchase purchase : purchaseList) {
-
-				saida += client.getName() + ", " + purchase.getSupplier() + ", " + purchase.toString2() + " | ";
-
-			}
+		for (Purchase purchase : this.allPurchases) {
+			saida += purchase.getClientName() + ", " + purchase.getSupplier() + ", " + purchase.toString2() + " | "; 
 		}
 
 		// Amigao Fernandes, Marcos, Coxao de frango com cheddar, 08/11/2018

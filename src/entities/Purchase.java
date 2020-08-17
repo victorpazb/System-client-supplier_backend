@@ -2,18 +2,24 @@ package entities;
 
 public class Purchase implements Comparable<Purchase> {
 
-	private String supplierName, dateOfPurchase, productName, productDescription, clientCpf;
+	private String supplierName, dateOfPurchase, productName, productDescription, clientCpf, clientName;
 	private double priceOfPurchase;
 
 	public Purchase(String supplierName, String dateOfPurchase, String productName, String productDescription,
-			double price, String clientCpf) {
-
+			double price, String clientCpf, String clientName) {
+		
+		
 		this.supplierName = supplierName;
 		this.dateOfPurchase = dateOfPurchase;
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.priceOfPurchase = price;
 		this.clientCpf = clientCpf;
+		this.clientName = clientName;
+	}
+	
+	public String getClientName() {
+		return this.clientName;
 	}
 
 	public double getPrice() {

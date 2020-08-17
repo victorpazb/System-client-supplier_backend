@@ -57,7 +57,7 @@ public class Client implements Comparable<Client> {
 			double priceOfPurchase) {
 
 		Purchase newPurchase = new Purchase(supplierName, dateOfPurchase, productName, productDescription,
-				priceOfPurchase, this.cpf);
+				priceOfPurchase, this.cpf, this.name);
 
 		this.purchaseCollection.put(productName + " - " + productDescription, newPurchase);
 
