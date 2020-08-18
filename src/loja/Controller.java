@@ -403,7 +403,7 @@ public class Controller {
 			break;
 
 		case "Fornecedor":
-			
+
 			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
 
 				// (<cliente>, <desc_prod>, <data_compra>;
@@ -427,7 +427,7 @@ public class Controller {
 				purchase.setListarComprasSelector(criterio);
 				saida += purchase.toString() + " | ";
 			}
-			
+
 			setAllPurchasesString(saida);
 			break;
 
@@ -498,11 +498,6 @@ public class Controller {
 	}
 
 	public String listarCompras() {
-
-		String listaDeCompras = "";
-		listaDeCompras = this.allPurchaseString;
-		this.allPurchaseString = "";
-
-		return listaDeCompras.substring(0, listaDeCompras.length() - 3);
+		return this.allPurchaseString.substring(0, this.allPurchaseString.length() - 3);
 	}
 }
