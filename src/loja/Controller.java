@@ -15,11 +15,21 @@ public class Controller {
 
 	private CollectionsOfObjects collections;
 	private ArrayList<Purchase> allPurchases;
+	private String allPurchaseString;
 
 	public Controller() {
 		this.collections = new CollectionsOfObjects();
 		this.allPurchases = new ArrayList<>();
+		this.allPurchaseString = "";
 
+	}
+
+	public void setAllPurchasesString(String allPurchases) {
+		this.allPurchaseString = allPurchases;
+	}
+
+	public String getAllPurchasesString() {
+		return this.allPurchaseString;
 	}
 
 	// ============================= USE CASE 1 ===================================
@@ -350,13 +360,21 @@ public class Controller {
 	public void ordenaPor(String criterio) {
 
 		for (Client client : this.collections.getClientCollection().values()) {
-			this.allPurchases.addAll(client.getPurchaseCollection().values());
-		}
-		this.allPurchases.addAll(this.collections.getPurchaseCollection().values());
+			for (ArrayList<Purchase> purchaseList : client.getClientPurchaseControl().values()) {
+				for (Purchase purchase : purchaseList) {
+					if (!this.allPurchases.contains(purchase)) {
+						this.allPurchases.add(purchase);
+					}
 
+				}
+			}
+		}
+
+		String saida = "";
 		switch (criterio.trim()) {
 
 		case "Cliente":
+
 			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
 
 				@Override
@@ -365,9 +383,19 @@ public class Controller {
 				}
 
 			});
+
+			for (Purchase purchase : this.allPurchases) {
+
+				purchase.setListarComprasSelector(criterio);
+				saida += purchase.toString() + " | ";
+			}
+
+			setAllPurchasesString(saida);
+
 			break;
 
 		case "Fornecedor":
+
 			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
 
 				@Override
@@ -376,17 +404,72 @@ public class Controller {
 				}
 
 			});
+
+			for (Purchase purchase : this.allPurchases) {
+				purchase.setListarComprasSelector(criterio);
+				saida += purchase.toString() + " | ";
+			}
+
+			setAllPurchasesString(saida);
 			break;
 
 		case "Data":
-			Collections.sort(allPurchases, new Comparator<Purchase>() {
+
+			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
 
 				@Override
 				public int compare(Purchase purchase1, Purchase purchase2) {
-					return purchase1.getDate().compareTo(purchase2.getDate());
+
+					if (purchase1.getDate().substring(6).compareTo(purchase2.getDate().substring(6)) < 0) {
+						return -1;
+					} else if (purchase1.getDate().substring(6).compareTo(purchase2.getDate().substring(6)) > 0) {
+						return 1;
+					} else {
+						if (purchase1.getDate().substring(3, 4).compareTo(purchase2.getDate().substring(3, 4)) < 0) {
+							return -1;
+						} else if (purchase1.getDate().substring(3, 4)
+								.compareTo(purchase2.getDate().substring(3, 4)) > 0) {
+							return 1;
+						} else {
+							if (purchase1.getDate().substring(0, 2)
+									.compareTo(purchase2.getDate().substring(0, 2)) < 0) {
+								return -1;
+							} else if (purchase1.getDate().substring(0, 2)
+									.compareTo(purchase2.getDate().substring(0, 2)) > 0)
+								return 1;
+							else {
+
+								/**
+								 * The criterion used for the tiebreaker if the dates are strictly equal is the
+								 * concatenation of clientName + supplierName + purchaseDescription
+								 */
+								String stringDesempate = purchase1.getClientName() + purchase1.getSupplier()
+										+ purchase1.getDescription();
+								String stringDesempate2 = purchase2.getClientName() + purchase2.getSupplier()
+										+ purchase2.getDescription();
+
+								if (stringDesempate.compareTo(stringDesempate2) < 0) {
+									return -1;
+								} else if (stringDesempate.compareTo(stringDesempate2) > 0) {
+									return 1;
+								} else {
+									return 0;
+								}
+							}
+						}
+					}
 				}
 
 			});
+
+			for (Purchase purchase : this.allPurchases) {
+
+				purchase.setListarComprasSelector(criterio);
+				saida += purchase.toString() + " | ";
+
+			}
+
+			setAllPurchasesString(saida);
 			break;
 
 		default:
@@ -397,15 +480,9 @@ public class Controller {
 	}
 
 	public String listarCompras() {
-
-		String saida = "";
-
-		for (Purchase purchase : this.allPurchases) {
-			saida += purchase.getClientName() + ", " + purchase.getSupplier() + ", " + purchase.toString2() + " | "; 
-		}
-
-		// Amigao Fernandes, Marcos, Coxao de frango com cheddar, 08/11/2018
-
-		return saida.substring(0, saida.length() - 3);
+		String listaDeCompras = "";
+		listaDeCompras = this.allPurchaseString;
+		this.allPurchaseString = "";
+		return listaDeCompras.substring(0, listaDeCompras.length() - 3);
 	}
 }
