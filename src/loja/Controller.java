@@ -373,13 +373,20 @@ public class Controller {
 		String saida = "";
 		switch (criterio.trim()) {
 
+		// (<fornecedor>, <desc_prod>, <data_compra>;
+
 		case "Cliente":
 
 			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
 
 				@Override
 				public int compare(Purchase purchase1, Purchase purchase2) {
-					return purchase1.getClientName().compareTo(purchase2.getClientName());
+					String comparatorString = purchase1.getSupplier() + purchase1.getDescription()
+							+ purchase1.getDate();
+					String comparatorString2 = purchase2.getSupplier() + purchase2.getDescription()
+							+ purchase2.getDate();
+					return (purchase1.getClientName() + comparatorString)
+							.compareTo(purchase2.getClientName() + comparatorString2);
 				}
 
 			});
