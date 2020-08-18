@@ -379,14 +379,13 @@ public class Controller {
 
 				@Override
 				public int compare(Purchase purchase1, Purchase purchase2) {
-					
+
 					String comparatorString = purchase1.getSupplier() + purchase1.getDescription()
 							+ purchase1.getDate();
-					
+
 					String comparatorString2 = purchase2.getSupplier() + purchase2.getDescription()
 							+ purchase2.getDate();
-					
-					
+
 					return (purchase1.getClientName() + comparatorString)
 							.compareTo(purchase2.getClientName() + comparatorString2);
 				}
@@ -404,12 +403,22 @@ public class Controller {
 			break;
 
 		case "Fornecedor":
-
+			
 			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
+
+				// (<cliente>, <desc_prod>, <data_compra>;
 
 				@Override
 				public int compare(Purchase purchase1, Purchase purchase2) {
-					return purchase1.getSupplier().compareTo(purchase2.getSupplier());
+
+					String comparatorString = purchase1.getClientName() + purchase1.getDescription()
+							+ purchase1.getDate();
+
+					String comparatorString2 = purchase2.getClientName() + purchase2.getDescription()
+							+ purchase2.getDate();
+
+					return (purchase1.getSupplier() + comparatorString)
+							.compareTo(purchase2.getSupplier() + comparatorString2);
 				}
 
 			});
@@ -418,7 +427,7 @@ public class Controller {
 				purchase.setListarComprasSelector(criterio);
 				saida += purchase.toString() + " | ";
 			}
-
+			
 			setAllPurchasesString(saida);
 			break;
 
@@ -489,11 +498,11 @@ public class Controller {
 	}
 
 	public String listarCompras() {
-		
+
 		String listaDeCompras = "";
 		listaDeCompras = this.allPurchaseString;
 		this.allPurchaseString = "";
-		
+
 		return listaDeCompras.substring(0, listaDeCompras.length() - 3);
 	}
 }

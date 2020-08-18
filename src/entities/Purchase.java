@@ -65,7 +65,7 @@ public class Purchase implements Comparable<Purchase> {
 			return this.clientName + ", " + this.supplierName + ", " + this.productDescription + ", "
 					+ this.dateOfPurchase;
 
-		case "Forncedor":
+		case "Fornecedor":
 			this.listarComprasSelector = "";
 			return this.supplierName + ", " + this.clientName + ", " + this.productDescription + ", "
 					+ this.dateOfPurchase;
