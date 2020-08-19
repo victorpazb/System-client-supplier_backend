@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class ComboProduct extends Product implements Comparable<Product> {
 
-	private String comboName, comboDescription;
-
 	private double discountFactor;
 
 	private ArrayList<Product> productsOfCombo2;

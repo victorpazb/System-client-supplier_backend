@@ -157,10 +157,7 @@ public class Client implements Comparable<Client> {
 	}
 
 	public void realizaPagamento(String supplierName) {
-
 		this.clientPurchaseControl.get(supplierName).clear(); // My purchase control does not have the bill anymore but
-																// remain booked
-
 	}
 
 }

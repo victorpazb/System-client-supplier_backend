@@ -81,14 +81,6 @@ public class Purchase implements Comparable<Purchase> {
 
 	}
 
-	private int compareCLiente(Purchase purchase1, Purchase purchase2) {
-		
-		String comparatorString = purchase1.getClientName() + purchase1.getDescription() + purchase1.getDate();
-		String comparatorString2 = purchase2.getClientName() + purchase2.getDescription() + purchase2.getDate();
-
-		return (purchase1.getSupplier() + comparatorString).compareTo(purchase2.getSupplier() + comparatorString2);
-	}
-
 	@Override
 	public int compareTo(Purchase otherPurchase) {
 
