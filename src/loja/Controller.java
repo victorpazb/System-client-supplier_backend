@@ -1,13 +1,15 @@
 package loja;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
 import collections.*;
+import comparators.PurchaseComparatorByClient;
+import comparators.PurchaseComparatorByDate;
+import comparators.PurchaseComparatorBySupplier;
 import entities.*;
 import exceptions.*;
 
@@ -375,22 +377,7 @@ public class Controller {
 
 		case "Cliente":
 
-			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
-
-				@Override
-				public int compare(Purchase purchase1, Purchase purchase2) {
-
-					String comparatorString = purchase1.getSupplier() + purchase1.getDescription()
-							+ purchase1.getDate();
-
-					String comparatorString2 = purchase2.getSupplier() + purchase2.getDescription()
-							+ purchase2.getDate();
-
-					return (purchase1.getClientName() + comparatorString)
-							.compareTo(purchase2.getClientName() + comparatorString2);
-				}
-
-			});
+			Collections.sort(this.allPurchases, new PurchaseComparatorByClient());
 
 			for (Purchase purchase : this.allPurchases) {
 
@@ -404,24 +391,7 @@ public class Controller {
 
 		case "Fornecedor":
 
-			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
-
-				// (<cliente>, <desc_prod>, <data_compra>;
-
-				@Override
-				public int compare(Purchase purchase1, Purchase purchase2) {
-
-					String comparatorString = purchase1.getClientName() + purchase1.getDescription()
-							+ purchase1.getDate();
-
-					String comparatorString2 = purchase2.getClientName() + purchase2.getDescription()
-							+ purchase2.getDate();
-
-					return (purchase1.getSupplier() + comparatorString)
-							.compareTo(purchase2.getSupplier() + comparatorString2);
-				}
-
-			});
+			Collections.sort(this.allPurchases, new PurchaseComparatorBySupplier());
 
 			for (Purchase purchase : this.allPurchases) {
 				purchase.setListarComprasSelector(criterio);
@@ -433,52 +403,7 @@ public class Controller {
 
 		case "Data":
 
-			Collections.sort(this.allPurchases, new Comparator<Purchase>() {
-
-				@Override
-				public int compare(Purchase purchase1, Purchase purchase2) {
-
-					if (purchase1.getDate().substring(6).compareTo(purchase2.getDate().substring(6)) < 0) {
-						return -1;
-					} else if (purchase1.getDate().substring(6).compareTo(purchase2.getDate().substring(6)) > 0) {
-						return 1;
-					} else {
-						if (purchase1.getDate().substring(3, 4).compareTo(purchase2.getDate().substring(3, 4)) < 0) {
-							return -1;
-						} else if (purchase1.getDate().substring(3, 4)
-								.compareTo(purchase2.getDate().substring(3, 4)) > 0) {
-							return 1;
-						} else {
-							if (purchase1.getDate().substring(0, 2)
-									.compareTo(purchase2.getDate().substring(0, 2)) < 0) {
-								return -1;
-							} else if (purchase1.getDate().substring(0, 2)
-									.compareTo(purchase2.getDate().substring(0, 2)) > 0)
-								return 1;
-							else {
-
-								/**
-								 * The criterion used for the tiebreaker if the dates are strictly equal is the
-								 * concatenation of clientName + supplierName + purchaseDescription
-								 */
-								String stringDesempate = purchase1.getClientName() + purchase1.getSupplier()
-										+ purchase1.getDescription();
-								String stringDesempate2 = purchase2.getClientName() + purchase2.getSupplier()
-										+ purchase2.getDescription();
-
-								if (stringDesempate.compareTo(stringDesempate2) < 0) {
-									return -1;
-								} else if (stringDesempate.compareTo(stringDesempate2) > 0) {
-									return 1;
-								} else {
-									return 0;
-								}
-							}
-						}
-					}
-				}
-
-			});
+			Collections.sort(this.allPurchases, new PurchaseComparatorByDate());
 
 			for (Purchase purchase : this.allPurchases) {
 
