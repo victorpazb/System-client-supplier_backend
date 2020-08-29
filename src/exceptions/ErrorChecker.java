@@ -49,7 +49,7 @@ public interface ErrorChecker {
 		}
 
 		if (!collectionOfClients.containsKey(clientCpf)) {
-			throw new IllegalArgumentException("Erro na exibicao do cliente: cliente nao existe.");
+			throw new NullPointerException("Erro na exibicao do cliente: cliente nao existe.");
 		}
 
 	}
